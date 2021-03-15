@@ -11,17 +11,16 @@ class DropboxController extends Controller
 {
 
     /**
-     * Show the profile for a given user.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * Shows content of selected location.
+     * @param
+     * @return
      */
 
     public function show(){
 
-        //Configuring an app
         $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
         $dropbox = new Dropbox($app);
+
         $listFolderContents = $dropbox->listFolder('/');
         $items = $listFolderContents->getItems();
 
@@ -35,14 +34,15 @@ class DropboxController extends Controller
     }
 
     /**
-     * Show the profile for a given user.
+     * Store selected file to a server
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param $request
+     * @return
      */
 
     public function store(Request $request)
     {
+
         $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
         $dropbox = new Dropbox($app);
 
@@ -55,10 +55,10 @@ class DropboxController extends Controller
     }
 
     /**
-     * Show the profile for a given user.
+     * Download file from a server.
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param Request $request
+     * @return
      */
 
     public function download(Request $request)
@@ -72,18 +72,18 @@ class DropboxController extends Controller
     }
 
     /**
-     * Show the profile for a given user.
+     * Create a folder.
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param  Request $request
+     * @return
      */
-    
+
     public function createFolder(Request $request)
     {
         //Configuring an app
         $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
-
         $dropbox = new Dropbox($app);
+
         // Creating a folder
         $nfName = $request->input('folderName');
         $folder = $dropbox->createFolder("/".$nfName);
@@ -91,12 +91,11 @@ class DropboxController extends Controller
         return redirect('/show');
     }
 
-    
     /**
-     * Show the profile for a given user.
+     * Open a folder from a given path
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param  Request $request
+     * @return
      */
 
     public function openFolder(Request $request){
