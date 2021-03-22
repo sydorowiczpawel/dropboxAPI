@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Kunnu\Dropbox\Dropbox;
-use Kunnu\Dropbox\DropboxApp;
+// use Kunnu\Dropbox\Dropbox;
+// use Kunnu\Dropbox\DropboxApp;
 use Kunnu\Dropbox\DropboxFile;
 
 class DropboxController extends Controller
@@ -18,8 +18,8 @@ class DropboxController extends Controller
 
     public function show(){
 
-        $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
-        $dropbox = new Dropbox($app);
+        // $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
+        // $dropbox = new Dropbox($app);
 
         $listFolderContents = $dropbox->listFolder('/');
         $items = $listFolderContents->getItems();
@@ -43,8 +43,8 @@ class DropboxController extends Controller
     public function store(Request $request)
     {
 
-        $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
-        $dropbox = new Dropbox($app);
+        // $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
+        // $dropbox = new Dropbox($app);
 
         $mode = DropboxFile::MODE_READ;
         $filePath = $request->file('fileToUpload')->getRealPath();
@@ -64,8 +64,8 @@ class DropboxController extends Controller
     public function download(Request $request)
     {
         $pd = $request->input('path_display');
-        $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
-        $dropbox = new Dropbox($app);
+        // $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
+        // $dropbox = new Dropbox($app);
         $download = $dropbox->download($pd, '../resources/downloaded_files' . $pd);
 
         return view('/layouts.downloaded')->with('pd', $pd);
@@ -81,8 +81,8 @@ class DropboxController extends Controller
     public function createFolder(Request $request)
     {
         //Configuring an app
-        $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
-        $dropbox = new Dropbox($app);
+        // $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
+        // $dropbox = new Dropbox($app);
 
         // Creating a folder
         $nfName = $request->input('folderName');
@@ -101,8 +101,8 @@ class DropboxController extends Controller
     public function openFolder(Request $request){
 
         $open = $request->input('path_display');
-        $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
-        $dropbox = new Dropbox($app);
+        // $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
+        // $dropbox = new Dropbox($app);
 
         $listFolderContents = $dropbox->listFolder($open);
         $items = $listFolderContents->getItems();
