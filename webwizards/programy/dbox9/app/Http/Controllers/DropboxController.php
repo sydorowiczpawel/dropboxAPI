@@ -13,7 +13,7 @@ class DropboxController extends Controller
 
     public function show(){
         $items = new DropboxConfig;
-        $items -> show_1($getItems);
+        $items -> show_1();
         // dd($items);
 
         return view('layouts.show')->with('items', $items);

@@ -13,8 +13,9 @@ class DropboxConfig
 
         $app = new DropboxApp(env('USER_ID'), env('USER_SECRET'), env('USER_TOKEN'));
         $dropbox = new Dropbox($app);
-
+        // dd($dropbox);
         $listFolderContents = $dropbox->listFolder('/');
+        $items = $listFolderContents->getItems();
 
         if ($listFolderContents->hasMoreItems()) {
             $cursor = $listFolderContents->getCursor();
@@ -22,7 +23,8 @@ class DropboxConfig
             $remainingItems = $listFolderContinue->getItems();
         }
 
-        return $listFolderContents;
+        // return view('layouts.show')->with('items', $items);
+        return $items;
     }
 
         public function saveFile(Request $request, $fileName)
